@@ -1,6 +1,7 @@
 ﻿using System;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.ViewModels;
+using Sample.Core.ViewModels;
 
 
 namespace Sample.Core {
@@ -9,7 +10,7 @@ namespace Sample.Core {
 
         public App() {
             
-            this.RegisterAppStart<DemoViewModel>();
+            this.RegisterAppStart<HomeViewModel>();
         }
 
 

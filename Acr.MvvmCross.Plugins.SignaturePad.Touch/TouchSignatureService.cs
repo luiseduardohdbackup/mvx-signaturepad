@@ -5,11 +5,9 @@ using SignaturePad;
 
 namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
     
-    public class TouchSignatureService : ISignatureService {
+    public class TouchSignatureService : AbstractSignatureService {
 
-        public PadConfiguration DefaultConfiguration { get; set; }
-
-        public void RequestSignature(Action<Stream> onSigned, Action cancelAction = null, PadConfiguration configuration = null) {
+        protected override void GetSignature(Action<Stream> onSave, Action onCancel, PadConfiguration cfg) {
             var signature = new SignaturePadView();
                 //StrokeColor = Co
                 //SignatureLineColor = 
@@ -24,9 +22,9 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
 
             // save text
             // cancel text (if available)
-            using (var image = signature.GetImage()) {
-                // TODO: to stream
-            }
+//            using (var image = signature.GetImage()) {
+//                // TODO: to stream
+//            }
         }
     }
 }

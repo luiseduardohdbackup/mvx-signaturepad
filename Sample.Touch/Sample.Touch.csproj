@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{85C0FCFC-13C2-4FA8-8F62-FEDA95015FFC}</ProjectGuid>
     <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
@@ -83,22 +81,23 @@
   <ItemGroup>
     <Compile Include="Bootstrap\ColorPluginBootstrap.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="AppDelegate.cs" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
+    <Compile Include="Setup.cs" />
+    <Compile Include="AppDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Acr.MvvmCross.Plugins.SignaturePad.Touch\Acr.MvvmCross.Plugins.SignaturePad.Touch.csproj">
-      <Project>{b12d20aa-0edf-4903-b385-bb8090848532}</Project>
+      <Project>{B12D20AA-0EDF-4903-B385-BB8090848532}</Project>
       <Name>Acr.MvvmCross.Plugins.SignaturePad.Touch</Name>
     </ProjectReference>
     <ProjectReference Include="..\Acr.MvvmCross.Plugins.SignaturePad\Acr.MvvmCross.Plugins.SignaturePad.csproj">
-      <Project>{b2af970d-d640-451c-95af-92af531b8c1e}</Project>
+      <Project>{B2AF970D-D640-451C-95AF-92AF531B8C1E}</Project>
       <Name>Acr.MvvmCross.Plugins.SignaturePad</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sample.Core\Sample.Core.csproj">
-      <Project>{e964232d-6d89-43e7-8433-3951ba627991}</Project>
+      <Project>{E964232D-6D89-43E7-8433-3951BA627991}</Project>
       <Name>Sample.Core</Name>
     </ProjectReference>
   </ItemGroup>

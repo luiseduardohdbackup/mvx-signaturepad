@@ -20,12 +20,5 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
 
         public float? StrokeWidth { get; set; }
         public MvxColor StrokeColor { get; set; }
-
-
-        public PadConfiguration() {
-            this.SaveText = "Save";
-            this.CancelText = "Cancel";
-            this.CaptionText = "Please Sign Here";
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-	<uses-sdk android:minSdkVersion="8" android:targetSdkVersion="8" />
-	<application></application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.acrapps.demo" android:versionCode="1.0">
+	<uses-sdk android:minSdkVersion="10" android:targetSdkVersion="19" />
+	<application android:label="Mvx Signature Demo">
+	</application>
 </manifest>
