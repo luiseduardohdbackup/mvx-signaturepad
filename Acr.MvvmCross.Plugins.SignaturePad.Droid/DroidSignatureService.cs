@@ -1,9 +1,7 @@
 using System;
 using System.IO;
 using Cirrious.CrossCore;
-using Cirrious.CrossCore.Droid;
-
-using SignaturePad;
+using Cirrious.CrossCore.Droid.Platform;
 
 
 namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
@@ -14,12 +12,12 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
         internal static Action OnCancel;
 
 
-        protected override void GetSignature(Action<Stream> onSave, Action onCancel, PadConfiguration cfg) {
+        protected override void GetSignature(Action<Stream> onSave, Action onCancel, PadConfiguration cfg) {            
             CurrentConfig = cfg;
             OnSave = onSave;
             OnCancel = onCancel;
-            var globals = Mvx.Resolve<IMvxAndroidGlobals>();
-            globals.ApplicationContext.StartActivity(typeof(SignaturePadActivity));
+            var topActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+            topActivity.StartActivity(typeof(SignaturePadActivity));
         }
     }
 }

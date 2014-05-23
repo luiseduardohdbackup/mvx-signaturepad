@@ -1,7 +1,6 @@
 ﻿using System;
 using Android.App;
 using Android.OS;
-using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Plugins.Color.Droid;
 using SignaturePad;
@@ -10,6 +9,7 @@ using System.IO;
 
 namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
 
+    [Activity]
     public class SignaturePadActivity : Activity {
         private SignaturePadView signatureView;
         private Button btnSave;
@@ -54,10 +54,14 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
 
 
         private void OnSave(object sender, EventArgs args) {
+            if (this.signatureView.IsBlank)
+                return;
+
             using (var image = this.signatureView.GetImage()) {
                 using (var stream = new MemoryStream()) {
                     image.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 100, stream);
                     DroidSignatureService.OnSave(stream);
+                    this.Finish();
                 }
             }
         }

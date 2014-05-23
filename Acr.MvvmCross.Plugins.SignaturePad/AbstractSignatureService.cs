@@ -9,7 +9,13 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
 
         protected AbstractSignatureService() {
             this.DefaultConfiguration = new PadConfiguration {
-                BackgroundColor = MvxColors.White,
+                BackgroundColor = MvxColors.Black,
+                CaptionTextColor = MvxColors.Black,
+                PromptColor = MvxColors.White,
+                StrokeColor = MvxColors.White,
+                StrokeWidth = 2f,
+                SignatureLineColor = MvxColors.Black,
+
                 SaveText = "Save",
                 CancelText = "Cancel",
                 CaptionText = "Please Sign Here"
@@ -35,7 +41,7 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
                 cfg.StrokeColor = cfg.StrokeColor ?? this.DefaultConfiguration.StrokeColor;
                 cfg.StrokeWidth = cfg.StrokeWidth ?? this.DefaultConfiguration.StrokeWidth;
             }
-            this.RequestSignature(onSave, onCancel, cfg);
+            this.GetSignature(onSave, onCancel, cfg);
         }
 
 

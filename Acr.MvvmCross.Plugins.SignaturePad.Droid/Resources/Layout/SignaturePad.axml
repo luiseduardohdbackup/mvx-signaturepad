@@ -7,7 +7,7 @@
     android:minHeight="25px"
     android:background="#ff777777"
     android:id="@+id/rootView">
-    <SignaturePad.SignaturePadView
+    <signaturepad.SignaturePadView
         android:id="@+id/signatureView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -23,7 +23,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginBottom="10dp" />
     <Button
         android:id="@+id/btnSave"
@@ -33,6 +33,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_marginBottom="10dp" />
 </RelativeLayout>

@@ -24,6 +24,7 @@ namespace Sample.Core.ViewModels {
             this.Create = new MvxCommand(this.OnCreate);
             this.Delete = new MvxCommand<Signature>(this.OnDelete);
             this.View = new MvxCommand<Signature>(this.OnView);
+            this.List = new ObservableCollection<Signature>();
         }
 
 

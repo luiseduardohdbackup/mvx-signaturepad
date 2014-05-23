@@ -18,6 +18,7 @@
         android:layout_height="wrap_content" />
     <MvxListView
         local:MvxBind="ItemsSource List; ItemClick View; Visible If(List.Count == 0, false, true)"
+        local:MvxItemTemplate="@layout/homelistitem"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
