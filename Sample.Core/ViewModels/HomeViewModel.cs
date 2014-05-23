@@ -12,7 +12,7 @@ namespace Sample.Core.ViewModels {
 
     public class HomeViewModel : MvxViewModel {
 
-        private const string FILE_FORMAT = "{0:dd-MM-yyyy hh:mm:ss tt}.jpg";
+        private const string FILE_FORMAT = "{0:dd-MM-yyyy_hh-mm-ss_tt}.jpg";
         private readonly IMvxFileStore store;
         private readonly ISignatureService signatureService;
 
@@ -34,8 +34,13 @@ namespace Sample.Core.ViewModels {
                 .GetFilesIn(".")
                 .ToList();
 
-            foreach (var file in files) 
-                this.List.Add(new Signature { FileName = file });
+            foreach (var file in files) { 
+                var path = this.store.NativePath(file);
+                this.List.Add(new Signature {
+                    FilePath = path,
+                    FileName = file
+                });
+            }
         }
 
 
@@ -57,6 +62,7 @@ namespace Sample.Core.ViewModels {
                     this.store.WriteFile(path, bytes);
                 }
                 this.List.Add(new Signature {
+                    FilePath = path,
                     FileName = fileName
                 });
             });      
@@ -70,8 +76,7 @@ namespace Sample.Core.ViewModels {
 
 
         private void OnDelete(Signature signature) {
-            var path = this.store.NativePath(signature.FileName);
-            this.store.DeleteFile(path);
+            this.store.DeleteFile(signature.FilePath);
             this.List.Remove(signature);
         }
     }
