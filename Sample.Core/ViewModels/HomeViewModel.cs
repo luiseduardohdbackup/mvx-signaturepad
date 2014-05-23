@@ -19,6 +19,8 @@ namespace Sample.Core.ViewModels {
 
         public HomeViewModel(IMvxFileStore store, ISignatureService signatureService) {
             this.store = store;
+            this.signatureService = signatureService;
+            this.Configure = new MvxCommand(() => this.ShowViewModel<ConfigurationViewModel>());
             this.Create = new MvxCommand(this.OnCreate);
             this.Delete = new MvxCommand<Signature>(this.OnDelete);
             this.View = new MvxCommand<Signature>(this.OnView);
@@ -37,6 +39,7 @@ namespace Sample.Core.ViewModels {
 
 
         public ObservableCollection<Signature> List { get; private set; }
+        public IMvxCommand Configure { get; private set; }
         public IMvxCommand Create { get; private set; }
         public MvxCommand<Signature> View { get; private set; }
         public MvxCommand<Signature> Delete { get; private set; }

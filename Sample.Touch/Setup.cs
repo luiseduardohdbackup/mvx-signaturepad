@@ -6,7 +6,7 @@ using MonoTouch.UIKit;
 using Sample.Core;
 
 
-namespace Sample.iOS {
+namespace Sample.Touch {
     
     public class Setup : MvxTouchDialogSetup {
 

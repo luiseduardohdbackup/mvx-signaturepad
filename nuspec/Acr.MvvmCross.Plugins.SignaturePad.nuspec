@@ -10,7 +10,7 @@
         <licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
         <projectUrl>https://github.com/aritchie/mvvm-signature-pad</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <tags>xamarin mvvmcross barcode android ios winphone</tags>
+        <tags>xamarin mvvmcross signature android ios winphone</tags>
         <dependencies>
             <dependency id="MvvmCross.HotTuna.CrossCore" version="3.1.1" />
             <dependency id="MvvmCross.HotTuna.Plugin.Color" version="3.1.1" />

@@ -16,6 +16,8 @@ namespace Sample.Core {
 
         public override void LoadPlugins(IMvxPluginManager pluginManager) {
             base.LoadPlugins(pluginManager);
+            pluginManager.EnsurePlatformAdaptionLoaded<Cirrious.MvvmCross.Plugins.Color.PluginLoader>();
+            pluginManager.EnsurePlatformAdaptionLoaded<Cirrious.MvvmCross.Plugins.File.PluginLoader>();
             pluginManager.EnsurePlatformAdaptionLoaded<Acr.MvvmCross.Plugins.SignaturePad.PluginLoader>();
         }
     }

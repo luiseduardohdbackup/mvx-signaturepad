@@ -3,9 +3,8 @@ using Android.App;
 using Cirrious.MvvmCross.Droid.Views;
 
 
-namespace Sample.Droid {
+namespace Sample.Droid.Views {
 
-    [IntentFilter(new [] {"" })]
     [Activity(MainLauncher = true, NoHistory = true)]
     public class SplashActivity : MvxSplashScreenActivity {
 
