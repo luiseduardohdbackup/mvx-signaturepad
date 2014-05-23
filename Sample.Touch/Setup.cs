@@ -1,5 +1,4 @@
 ﻿using System;
-using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using MonoTouch.UIKit;
@@ -8,7 +7,7 @@ using Sample.Core;
 
 namespace Sample.Touch {
     
-    public class Setup : MvxTouchDialogSetup {
+    public class Setup : MvxTouchSetup {
 
         public Setup(MvxApplicationDelegate appDelegate, UIWindow window) : base(appDelegate, window) {}
 

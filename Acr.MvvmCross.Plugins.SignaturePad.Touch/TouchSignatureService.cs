@@ -7,7 +7,7 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
     
     public class TouchSignatureService : AbstractSignatureService {
 
-        protected override void GetSignature(Action<Stream> onSave, Action onCancel, PadConfiguration cfg) {
+        protected override void GetSignature(Action<SignatureResult> onSave, Action onCancel, PadConfiguration cfg) {
             var signature = new SignaturePadView();
                 //StrokeColor = Co
                 //SignatureLineColor = 

@@ -20,8 +20,8 @@
         local:MvxBind="ItemsSource List; ItemClick View; Visible If(List.Count == 0, false, true)"
         local:MvxItemTemplate="@layout/homelistitem"
         android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
     <TextView
         local:MvxBind="Visible If(List.Count == 0, true, false)"
         android:text="No Signatures Found"

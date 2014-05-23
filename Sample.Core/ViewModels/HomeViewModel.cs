@@ -47,12 +47,12 @@ namespace Sample.Core.ViewModels {
 
 
         private void OnCreate() {
-            this.signatureService.RequestSignature(stream => {
+            this.signatureService.RequestSignature(result => {
                 var fileName = String.Format(FILE_FORMAT, DateTime.Now);
                 var path = this.store.NativePath(fileName);
 
                 using (var ms = new MemoryStream()) {
-                    stream.CopyTo(ms);
+                    result.Stream.CopyTo(ms);
                     var bytes = ms.ToArray();
                     this.store.WriteFile(path, bytes);
                 }

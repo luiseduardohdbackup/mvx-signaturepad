@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Android.App;
 using Android.OS;
 using Android.Widget;
@@ -58,9 +59,13 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
                 return;
 
             using (var image = this.signatureView.GetImage()) {
+                var points = this.signatureView
+                    .Points
+                    .Select(x => new DrawPoint(x.X, x.Y, x.IsEmpty));
+
                 using (var stream = new MemoryStream()) {
                     image.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 100, stream);
-                    DroidSignatureService.OnSave(stream);
+                    DroidSignatureService.OnSave(new SignatureResult(stream, points));
                     this.Finish();
                 }
             }

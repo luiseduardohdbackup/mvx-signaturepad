@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Cirrious.CrossCore.UI;
 
 
@@ -23,10 +22,10 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
         }
 
 
-        protected abstract void GetSignature(Action<Stream> onSave, Action onCancel, PadConfiguration cfg);
+        protected abstract void GetSignature(Action<SignatureResult> onSave, Action onCancel, PadConfiguration cfg);
 
 
-        public void RequestSignature(Action<Stream> onSave, Action onCancel, PadConfiguration cfg) {
+        public void RequestSignature(Action<SignatureResult> onSave, Action onCancel, PadConfiguration cfg) {
             if (cfg == null)
                 cfg = this.DefaultConfiguration;
             else {

@@ -1,14 +1,11 @@
 using System;
-using System.IO;
 
 
 namespace Acr.MvvmCross.Plugins.SignaturePad.WindowsPhone {
     
-    public class WinPhoneSignatureService : ISignatureService {
-
-        public PadConfiguration DefaultConfiguration { get; set; }
-
-        public void RequestSignature(Action<Stream> onSigned, Action cancelAction = null, PadConfiguration configuration = null) {
+    public class WinPhoneSignatureService : AbstractSignatureService {
+        
+        protected override void GetSignature(Action<SignatureResult> onSave, Action onCancel, PadConfiguration cfg) {
 
             //var signature = new SignaturePadView();
                 //StrokeColor = Co
