@@ -4,7 +4,7 @@ using Cirrious.MvvmCross.ViewModels;
 using System.Runtime.CompilerServices;
 
 
-namespace Sample.Core {
+namespace Sample.Core.ViewModels {
     
     public class ConfigurationViewModel : MvxViewModel {
         private readonly ISignatureService signatureService;

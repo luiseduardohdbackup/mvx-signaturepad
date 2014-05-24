@@ -34,7 +34,6 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
             this.signatureView.SignaturePrompt.SetTextColor(cfg.PromptColor.ToAndroidColor());
             this.signatureView.Caption.Text = cfg.CaptionText;
             this.signatureView.Caption.SetTextColor(cfg.CaptionTextColor.ToAndroidColor());
-
             this.btnSave.Text = cfg.SaveText;
             this.btnCancel.Text = cfg.CancelText;
         }
