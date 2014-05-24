@@ -22,7 +22,7 @@ namespace Sample.Touch.Views {
             this.Root = new RootElement("Configuration") {
                 new Section("Button Text") {
                     new StringElement("Save").Bind(bindings, x => x.Value, x => x.SaveText),
-                    new StringElement("Text").Bind(bindings, x => x.SelectedCommand, x => x.CancelText)
+                    new StringElement("Cancel").Bind(bindings, x => x.Value, x => x.CancelText)
                 },
                 new Section("Colors") {
                 }

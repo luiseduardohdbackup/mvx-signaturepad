@@ -6,6 +6,10 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
     
     public class PadConfiguration {
 
+//        public ImageFormatType FormatType { get; set; } // png or jpg
+//        public int ImageQuality { get; set; }
+//        public string ClearText { get; set; }
+
         public string SaveText { get; set; }
         public string CancelText { get; set; }
 

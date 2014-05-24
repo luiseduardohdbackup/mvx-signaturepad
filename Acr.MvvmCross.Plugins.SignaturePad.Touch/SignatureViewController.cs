@@ -1,17 +1,23 @@
 ﻿using System;
+using System.Linq;
 using MonoTouch.UIKit;
 using SignaturePad;
 using Cirrious.CrossCore;
 
 
+
 namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
 
     public class SignatureViewController : UIViewController {
+        private readonly Action<SignatureResult> onSave;
+        private readonly Action onCancel;
         private readonly PadConfiguration config;
 
 
-        public SignatureViewController(PadConfiguration config) {
+        public SignatureViewController(PadConfiguration config, Action<SignatureResult> onSave, Action onCancel) {
             this.config = config;
+            this.onSave = onSave;
+            this.onCancel = onCancel;
         }
 
 
@@ -19,22 +25,10 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
             base.ViewDidLoad();
             //Frame = UIScreen.MainScreen.ApplicationFrame;
 
-            var btnSave = UIButton.FromType(UIButtonType.RoundedRect);
-            btnSave.SetTitle(this.config.SaveText, UIControlState.Normal);
-            btnSave.TouchUpInside += (sender, args) => {
-            };
-
-            var btnCancel = UIButton.FromType(UIButtonType.RoundedRect);
-            btnCancel.SetTitle(this.config.CancelText, UIControlState.Normal);
-            btnCancel.TouchUpInside += (sender, args) => {
-//                if (points != null)
-//                    Signature.LoadPoints (points);
-            };
- 
             var signature = new SignaturePadView {
-//                BackgroundColor = this.config.BackgroundColor
-//                SignatureLineColor = this.config.SignatureLineColor
-//                StrokeColor = this.config.StrokeColor,
+                //                BackgroundColor = this.config.BackgroundColor
+                //                SignatureLineColor = this.config.SignatureLineColor
+                //                StrokeColor = this.config.StrokeColor,
                 StrokeWidth = this.config.StrokeWidth.Value
             };
 
@@ -43,6 +37,34 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
 
             signature.SignaturePrompt.Text = this.config.PromptText;
             //            signature.SignaturePrompt.TextColor = this.config.PromptColor.
+
+            var btnSave = UIButton.FromType(UIButtonType.RoundedRect);
+            btnSave.SetTitle(this.config.SaveText, UIControlState.Normal);
+            btnSave.TouchUpInside += (sender, args) => {
+                if (signature.IsBlank)
+                    return;
+
+                var points = signature
+                    .Points
+                    .Select(x => new DrawPoint(x.X, x.Y, x.IsEmpty));
+
+                using (var image = signature.GetImage()) {
+                    using (var stream = image.AsJPEG().AsStream()) {
+                        this.onSave(new SignatureResult(stream, points));
+                        this.DismissViewController(true, null);
+                    }
+                }
+            };
+
+            var btnCancel = UIButton.FromType(UIButtonType.RoundedRect);
+            btnCancel.SetTitle(this.config.CancelText, UIControlState.Normal);
+            btnCancel.TouchUpInside += (sender, args) => {
+                this.DismissViewController(true, null);
+                if (this.onCancel != null)
+                    this.onCancel();
+            };
+ 
+
 
             this.Add(btnCancel);
             this.Add(btnSave);

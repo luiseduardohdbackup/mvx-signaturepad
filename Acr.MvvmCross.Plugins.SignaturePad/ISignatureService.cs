@@ -8,5 +8,6 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
 
         PadConfiguration DefaultConfiguration { get; }
         void RequestSignature(Action<SignatureResult> onSave, Action onCancel = null, PadConfiguration cfg = null);
+//        void LoadSignature(params DrawPoint[] points);
     }
 }

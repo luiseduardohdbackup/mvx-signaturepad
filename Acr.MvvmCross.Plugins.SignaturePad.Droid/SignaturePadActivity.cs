@@ -57,12 +57,12 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
             if (this.signatureView.IsBlank)
                 return;
 
-            using (var image = this.signatureView.GetImage()) {
-                var points = this.signatureView
-                    .Points
-                    .Select(x => new DrawPoint(x.X, x.Y, x.IsEmpty));
+            var points = this.signatureView
+                .Points
+                .Select(x => new DrawPoint(x.X, x.Y, x.IsEmpty));
 
-                using (var stream = new MemoryStream()) {
+            using (var image = this.signatureView.GetImage()) {
+                 using (var stream = new MemoryStream()) {
                     image.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 100, stream);
                     DroidSignatureService.OnSave(new SignatureResult(stream, points));
                     this.Finish();
@@ -73,6 +73,7 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
 
         private void OnCancel(object sender, EventArgs args) {
             DroidSignatureService.OnCancel();
+            this.Finish();
         }
     }
 }
