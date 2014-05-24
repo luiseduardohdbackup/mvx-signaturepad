@@ -1,6 +1,7 @@
 ##Signature Pad for iOS, Android, and Windows Phone 8
 
-	signatureService.RequestSignature
+	signatureService.RequestSignature(result => {
+	});
 
 
 #Default Configuration

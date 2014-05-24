@@ -20,7 +20,7 @@ namespace Sample.Touch.Views {
             var btnConfig = new UIBarButtonItem(UIBarButtonSystemItem.Edit);
             this.NavigationItem.RightBarButtonItems = new [] { btnAdd, btnConfig };
 
-            var src = new MvxStandardTableViewSource(this.TableView, "TitleText Title");
+            var src = new MvxStandardTableViewSource(this.TableView, "TitleText FileName");
 
             var set = this.CreateBindingSet<HomeView, HomeViewModel>();
             set.Bind(src).To(x => x.List);

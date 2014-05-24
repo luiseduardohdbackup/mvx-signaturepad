@@ -45,7 +45,8 @@
     <Compile Include="TouchSignatureService.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SignatureViewController.cs" />
+    <Compile Include="MvxSignatureView.cs" />
+    <Compile Include="MvxSignatureController.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="signature-pad">

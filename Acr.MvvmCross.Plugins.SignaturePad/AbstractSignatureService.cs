@@ -1,5 +1,6 @@
 ﻿using System;
 using Cirrious.CrossCore.UI;
+using System.Threading.Tasks;
 
 
 namespace Acr.MvvmCross.Plugins.SignaturePad {
@@ -22,10 +23,18 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
         }
 
 
-        protected abstract void GetSignature(Action<SignatureResult> onSave, Action onCancel, PadConfiguration cfg);
+        protected abstract void GetSignature(Action<SignatureResult> onResult, PadConfiguration cfg);
+//        public abstract void LoadSignature(params DrawPoint[] points);
 
 
-        public void RequestSignature(Action<SignatureResult> onSave, Action onCancel, PadConfiguration cfg) {
+        public virtual Task<SignatureResult> RequestSignatureAsync(PadConfiguration cfg) {
+            var tcs = new TaskCompletionSource<SignatureResult>();
+            this.RequestSignature(x => tcs.SetResult(x), cfg);
+            return tcs.Task;
+        }
+
+
+        public virtual void RequestSignature(Action<SignatureResult> onResult, PadConfiguration cfg) {
             if (cfg == null)
                 cfg = this.DefaultConfiguration;
             else {
@@ -40,7 +49,7 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
                 cfg.StrokeColor = cfg.StrokeColor ?? this.DefaultConfiguration.StrokeColor;
                 cfg.StrokeWidth = cfg.StrokeWidth ?? this.DefaultConfiguration.StrokeWidth;
             }
-            this.GetSignature(onSave, onCancel, cfg);
+            this.GetSignature(onResult, cfg);
         }
 
 
