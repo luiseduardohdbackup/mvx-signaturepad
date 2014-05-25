@@ -1,12 +1,13 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Drawing;
+using System.Collections.Generic;
 using MonoTouch.UIKit;
 using SignaturePad;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Plugins.Color.Touch;
-
-
+using MonoTouch.Foundation;
 
 
 namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
@@ -15,13 +16,20 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
 
         private MvxSignatureView view;
 
-        private readonly Action<SignatureResult> onResult;
-        private readonly PadConfiguration config;
+        private IEnumerable<DrawPoint> points;
+        private Action<SignatureResult> onResult;
+        private readonly SignaturePadConfiguration config;
 
 
-        public MvxSignatureController(PadConfiguration config, Action<SignatureResult> onResult) {
+        public MvxSignatureController(SignaturePadConfiguration config, Action<SignatureResult> onResult) {
             this.config = config;
             this.onResult = onResult;
+        }
+
+
+        public MvxSignatureController(SignaturePadConfiguration config, IEnumerable<DrawPoint> points) {
+            this.config = config;
+            this.points = points;
         }
 
 
@@ -32,53 +40,79 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
             this.View = this.view;
         }
 
+        public override void ViewDidLoad() {
+            base.ViewDidLoad();
+
+            this.view.Signature.BackgroundColor = this.config.BackgroundColor.ToNativeColor();
+            this.view.Signature.Caption.TextColor = this.config.CaptionTextColor.ToNativeColor();
+            this.view.Signature.Caption.Text = this.config.CaptionText;
+            this.view.Signature.ClearLabel.SetTitle(this.config.ClearText, UIControlState.Normal);
+            this.view.Signature.ClearLabel.SetTitleColor(this.config.ClearTextColor.ToNativeColor(), UIControlState.Normal);
+            this.view.Signature.SignatureLineColor = this.config.SignatureLineColor.ToNativeColor();
+            this.view.Signature.SignaturePrompt.Text = this.config.PromptText;
+            this.view.Signature.SignaturePrompt.TextColor = this.config.PromptColor.ToNativeColor();
+            this.view.Signature.StrokeColor = this.config.StrokeColor.ToNativeColor();
+            this.view.Signature.StrokeWidth = this.config.StrokeWidth.Value;
+            this.view.Signature.Layer.ShadowOffset = new System.Drawing.SizeF (0, 0);
+            this.view.Signature.Layer.ShadowOpacity = 1f;
+
+            if (this.onResult == null) {
+                this.view.CancelButton.Hidden = true;
+                this.view.SaveButton.Hidden = true;
+                this.view.Signature.ClearLabel.Hidden = true;
+                this.view.Signature.LoadPoints(this.points.Select(x => new PointF { X = x.X, Y = x.Y }).ToArray());
+            }
+            else {
+                this.view.SaveButton.SetTitle(this.config.SaveText, UIControlState.Normal);
+                this.view.SaveButton.TouchUpInside += (sender, args) => {
+                    if (this.view.Signature.IsBlank)
+                        return;
+
+                    var points = this.view
+                        .Signature
+                        .Points
+                        .Select(x => new DrawPoint(x.X, x.Y));
+
+                    using (var image = this.view.Signature.GetImage()) {
+                        using (var stream = GetImageStream(image, this.config.ImageType)) {
+                            this.DismissViewController(true, null);
+                            this.onResult(new SignatureResult(false, stream, points));
+                        }
+                    }
+                };
+
+                this.view.CancelButton.SetTitle(this.config.CancelText, UIControlState.Normal);
+                this.view.CancelButton.TouchUpInside += (sender, args) => {
+                    this.DismissViewController(true, null);
+                    this.onResult(new SignatureResult(true, null, null));
+                };
+            }
+        }
+
 
         public void LoadSignature(params PointF[] points) {
             this.view.Signature.LoadPoints(points);
         }
 
 
-        public override void ViewDidLoad() {
-            base.ViewDidLoad();
+//        public override void TouchesBegan(NSSet touches, UIEvent evt) {
+//            base.TouchesBegan(touches, evt);
+//            if (this.onResult == null)
+//                this.DismissViewController(true, null);
+//        }
 
-//            if (new Version (MonoTouch.Constants.Version) >= new Version (7, 0)) 
-//                UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
 
-            this.view.Signature.BackgroundColor = this.config.BackgroundColor.ToNativeColor();
-            this.view.Signature.SignatureLineColor = this.config.SignatureLineColor.ToNativeColor();
-            this.view.Signature.StrokeColor = this.config.StrokeColor.ToNativeColor();
-            this.view.Signature.StrokeWidth = this.config.StrokeWidth.Value;
-            this.view.Signature.Caption.TextColor = this.config.CaptionTextColor.ToNativeColor();
-            this.view.Signature.Caption.Text = this.config.CaptionText;
-            this.view.Signature.SignaturePrompt.Text = this.config.PromptText;
-            this.view.Signature.SignaturePrompt.TextColor = this.config.PromptColor.ToNativeColor();
+        private static Stream GetImageStream(UIImage image, ImageFormatType formatType) {
+            if (formatType == ImageFormatType.Jpg)
+                return image.AsJPEG().AsStream();
 
-            // set the buttons
-            this.view.SaveButton.SetTitle(this.config.SaveText, UIControlState.Normal);
-            this.view.CancelButton.SetTitle(this.config.CancelText, UIControlState.Normal);
+            return image.AsPNG().AsStream();
+        }
+    }
+}
 
-            this.view.SaveButton.TouchUpInside += (sender, args) => {
-                if (this.view.Signature.IsBlank)
-                    return;
 
-                var points = this.view
-                    .Signature
-                    .Points
-                    .Select(x => new DrawPoint(x.X, x.Y, x.IsEmpty));
-
-                using (var image = this.view.Signature.GetImage()) {
-                    using (var stream = image.AsJPEG().AsStream()) {
-                        this.DismissViewController(true, null);
-                        this.onResult(new SignatureResult(false, stream, points));
-                    }
-                }
-            };
-
-            this.view.CancelButton.TouchUpInside += (sender, args) => {
-                this.DismissViewController(true, null);
-                this.onResult(new SignatureResult(true, null, null));
-            };
-            //            FROM XAMARIN SAMPLES
+//            FROM XAMARIN SAMPLES
 //            this.view.Signature.Caption.Font = UIFont.FromName ("Marker Felt", 16f);
 //            this.view.Signature.SignaturePrompt.Font = UIFont.FromName ("Helvetica", 32f);
 //            this.view.Signature.BackgroundColor = UIColor.FromRGB (255, 255, 200); // a light yellow.
@@ -86,11 +120,3 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
 //            this.view.Signature.BackgroundImageView.Alpha = 0.0625f;
 //            this.view.Signature.BackgroundImageView.ContentMode = UIViewContentMode.ScaleToFill;
 //            this.view.Signature.BackgroundImageView.Frame = new System.Drawing.RectangleF(20, 20, 256, 256);
-
-            this.view.Signature.Layer.ShadowOffset = new System.Drawing.SizeF (0, 0);
-            this.view.Signature.Layer.ShadowOpacity = 1f;
-        }
-    }
-}
-
-

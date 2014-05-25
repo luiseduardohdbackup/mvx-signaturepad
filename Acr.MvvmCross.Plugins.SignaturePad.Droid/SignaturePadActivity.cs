@@ -1,11 +1,13 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Drawing;
 using Android.App;
 using Android.OS;
 using Android.Widget;
+using Android.Views;
 using Cirrious.MvvmCross.Plugins.Color.Droid;
 using SignaturePad;
-using System.IO;
 
 
 namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
@@ -27,15 +29,30 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
 
             var cfg = DroidSignatureService.CurrentConfig;
             this.signatureView.BackgroundColor = cfg.BackgroundColor.ToAndroidColor();
-            this.signatureView.SignatureLineColor = cfg.SignatureLineColor.ToAndroidColor();
-            this.signatureView.StrokeColor = cfg.StrokeColor.ToAndroidColor();
-            this.signatureView.StrokeWidth = cfg.StrokeWidth.Value;
-            this.signatureView.SignaturePrompt.Text = cfg.PromptText;
-            this.signatureView.SignaturePrompt.SetTextColor(cfg.PromptColor.ToAndroidColor());
             this.signatureView.Caption.Text = cfg.CaptionText;
             this.signatureView.Caption.SetTextColor(cfg.CaptionTextColor.ToAndroidColor());
+            this.signatureView.ClearLabel.Text = cfg.ClearText;
+            this.signatureView.ClearLabel.SetTextColor(cfg.ClearTextColor.ToAndroidColor());
+            this.signatureView.SignatureLineColor = cfg.SignatureLineColor.ToAndroidColor(); 
+            this.signatureView.SignaturePrompt.Text = cfg.PromptText;
+            this.signatureView.SignaturePrompt.SetTextColor(cfg.PromptColor.ToAndroidColor());
+            this.signatureView.StrokeColor = cfg.StrokeColor.ToAndroidColor();
+            this.signatureView.StrokeWidth = cfg.StrokeWidth.Value;
+
             this.btnSave.Text = cfg.SaveText;
             this.btnCancel.Text = cfg.CancelText;
+
+            if (DroidSignatureService.CurrentPoints != null) {
+                this.btnSave.Visibility = ViewStates.Gone;
+                this.btnCancel.Visibility = ViewStates.Gone;
+//                this.signatureView.Enabled = false;
+                this.signatureView.LoadPoints(
+                    DroidSignatureService
+                        .CurrentPoints
+                        .Select(x => new PointF { X = x.X, Y = x.Y })
+                        .ToArray()
+                );
+            }
         }
 
 
@@ -59,12 +76,15 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
 
             var points = this.signatureView
                 .Points
-                .Select(x => new DrawPoint(x.X, x.Y, x.IsEmpty));
+                .Select(x => new DrawPoint(x.X, x.Y));
 
             using (var image = this.signatureView.GetImage()) {
                  using (var stream = new MemoryStream()) {
-                    image.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 100, stream);
-                    DroidSignatureService.OnSave(new SignatureResult(stream, points));
+                    var format = DroidSignatureService.CurrentConfig.ImageType == ImageFormatType.Png
+                        ? Android.Graphics.Bitmap.CompressFormat.Png
+                        : Android.Graphics.Bitmap.CompressFormat.Jpeg;
+                    image.Compress(format, 100, stream);
+                    DroidSignatureService.OnResult(new SignatureResult(false, stream, points));
                     this.Finish();
                 }
             }
@@ -72,7 +92,7 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
 
 
         private void OnCancel(object sender, EventArgs args) {
-            DroidSignatureService.OnCancel();
+            DroidSignatureService.OnResult(new SignatureResult(true, null, null));
             this.Finish();
         }
     }

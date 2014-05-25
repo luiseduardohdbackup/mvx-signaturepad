@@ -32,15 +32,14 @@ namespace Sample.Core.ViewModels {
             base.Start();
             var files = this.store
                 .GetFilesIn(".")
+                .Select(x => new Signature {
+                    FileName = Path.GetFileName(x),
+                    FilePath = x
+                })
                 .ToList();
 
-            foreach (var file in files) { 
-                var path = this.store.NativePath(file);
-                this.List.Add(new Signature {
-                    FilePath = path,
-                    FileName = file
-                });
-            }
+            foreach (var file in files)
+                this.List.Add(file);
         }
 
 

@@ -79,11 +79,11 @@
     </Compile>
     <Compile Include="DrawPoint.cs" />
     <Compile Include="ISignatureService.cs" />
-    <Compile Include="PadConfiguration.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AbstractSignatureService.cs" />
     <Compile Include="SignatureResult.cs" />
+    <Compile Include="SignaturePadConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

@@ -7,19 +7,19 @@ using SignaturePad;
 namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
 
     public class MvxSignatureView : UIView {
-        public SignaturePadView Signature { get; set; }
 
+        public SignaturePadView Signature { get; set; }
         public UIButton SaveButton { get; private set; }
         public UIButton CancelButton { get; private set; }
 
 
         public MvxSignatureView() {
-            BackgroundColor = UIColor.White;
-            this.SaveButton = UIButton.FromType (UIButtonType.RoundedRect);
-            this.CancelButton = UIButton.FromType (UIButtonType.RoundedRect);
+            //BackgroundColor = UIColor.White;
+            this.SaveButton = UIButton.FromType(UIButtonType.RoundedRect);
+            this.CancelButton = UIButton.FromType(UIButtonType.RoundedRect);
             this.Frame = UIScreen.MainScreen.ApplicationFrame;
 
-            this.Signature = new SignaturePadView ();
+            this.Signature = new SignaturePadView();
             this.TranslatesAutoresizingMaskIntoConstraints = false;
 
             this.AddSubview(this.Signature);
@@ -29,9 +29,9 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
 
 
         public override void LayoutSubviews() {
-            if (new Version(MonoTouch.Constants.Version) >= new Version (7, 0)) {
-                var sbframe = UIApplication.SharedApplication.StatusBarFrame;
+//            if (new Version(MonoTouch.Constants.Version) >= new Version (7, 0)) {
                 var frame = this.Frame;
+                var sbframe = UIApplication.SharedApplication.StatusBarFrame;
                 var portrait = UIApplication.SharedApplication.StatusBarOrientation.HasFlag(UIDeviceOrientation.Portrait);
 
                 var width = portrait
@@ -50,8 +50,8 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
                     ? frame.Location.Y + sbframe.Height
                     : 0;
 
-                this.Frame = new RectangleF (x, y, width, height);
-            }
+                this.Frame = new RectangleF(x, y, width, height);
+//            }
 
             ///Using different layouts for the iPhone and iPad, so setup device specific requirements here.
 //            if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone)
