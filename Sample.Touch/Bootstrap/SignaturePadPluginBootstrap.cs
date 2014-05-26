@@ -1,8 +1,8 @@
-﻿using Cirrious.CrossCore.Plugins;
+using Cirrious.CrossCore.Plugins;
 
-namespace Sample.Core.Bootstrap
+namespace Sample.Touch.Bootstrap
 {
-    public class SignaturePadPluginBootstrap
+    public class BarCodeScannerPluginBootstrap
         : MvxLoaderPluginBootstrapAction<Acr.MvvmCross.Plugins.SignaturePad.PluginLoader, Acr.MvvmCross.Plugins.SignaturePad.Touch.Plugin>
     {
     }

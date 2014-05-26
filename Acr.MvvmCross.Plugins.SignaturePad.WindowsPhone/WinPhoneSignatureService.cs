@@ -4,26 +4,14 @@ using System;
 namespace Acr.MvvmCross.Plugins.SignaturePad.WindowsPhone {
     
     public class WinPhoneSignatureService : AbstractSignatureService {
-        
-        protected override void GetSignature(Action<SignatureResult> onSave, Action onCancel, PadConfiguration cfg) {
 
-            //var signature = new SignaturePadView();
-                //StrokeColor = Co
-                //SignatureLineColor = 
-            //signature.SignatureLineColor = Color
-            //signature.BackgroundColor
-            //signature.StrokeColor
-            //signature.StrokeWidth
-            //signature.Caption.Text
-            //signature.Caption.CurrentTextColor
-            //signature.SignaturePrompt.Text
-            //signature.SignaturePrompt.CurrentTextColor
+        protected override void GetSignature(Action<SignatureResult> onResult, SignaturePadConfiguration cfg) {
+            throw new NotImplementedException();
+        }
 
-            // save text
-            // cancel text (if available)
-            //using (var image = signature.GetImage()) {
-            //    // TODO: to stream
-            //}
+
+        protected override void Load(System.Collections.Generic.IEnumerable<DrawPoint> points, SignaturePadConfiguration cfg) {
+            throw new NotImplementedException();
         }
     }
 }

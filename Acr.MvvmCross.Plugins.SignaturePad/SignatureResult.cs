@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Collections.Generic;
 
 
 namespace Acr.MvvmCross.Plugins.SignaturePad {
@@ -10,11 +10,10 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
         public bool Cancelled { get; private set; }
         public Stream Stream { get; private set; }
         public IEnumerable<DrawPoint> Points { get; private set; }
-        //public bool IsBlank
 
 
         public SignatureResult(bool cancelled, Stream stream, IEnumerable<DrawPoint> points) {
-            this.Cancelled = true;
+            this.Cancelled = cancelled;
             this.Stream = stream;
             this.Points = points;
         }

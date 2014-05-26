@@ -38,7 +38,7 @@ namespace Sample.Core.ViewModels {
             this.captionText = cfg.CaptionText;
 
             this.bgColor = this.GetColorDefinition(cfg.BackgroundColor);
-            this.promptTextColor = this.GetColorDefinition(cfg.PromptColor);
+            this.promptTextColor = this.GetColorDefinition(cfg.PromptTextColor);
             this.captionTextColor = this.GetColorDefinition(cfg.CaptionTextColor);
             this.signatureLineColor = this.GetColorDefinition(cfg.SignatureLineColor);
             this.strokeColor = this.GetColorDefinition(cfg.StrokeColor);
@@ -167,7 +167,7 @@ namespace Sample.Core.ViewModels {
             get { return this.promptTextColor; }
             set {
                 if (this.SetPropertyChange(ref this.promptTextColor, value))
-                    this.signatureService.DefaultConfiguration.PromptColor = value.Color;
+                    this.signatureService.DefaultConfiguration.PromptTextColor = value.Color;
             }
         }
 

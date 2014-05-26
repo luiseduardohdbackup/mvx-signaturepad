@@ -50,10 +50,10 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
             this.view.Signature.ClearLabel.SetTitleColor(this.config.ClearTextColor.ToNativeColor(), UIControlState.Normal);
             this.view.Signature.SignatureLineColor = this.config.SignatureLineColor.ToNativeColor();
             this.view.Signature.SignaturePrompt.Text = this.config.PromptText;
-            this.view.Signature.SignaturePrompt.TextColor = this.config.PromptColor.ToNativeColor();
+            this.view.Signature.SignaturePrompt.TextColor = this.config.PromptTextColor.ToNativeColor();
             this.view.Signature.StrokeColor = this.config.StrokeColor.ToNativeColor();
             this.view.Signature.StrokeWidth = this.config.StrokeWidth.Value;
-            this.view.Signature.Layer.ShadowOffset = new System.Drawing.SizeF (0, 0);
+            this.view.Signature.Layer.ShadowOffset = new SizeF(0, 0);
             this.view.Signature.Layer.ShadowOpacity = 1f;
 
             if (this.onResult == null) {

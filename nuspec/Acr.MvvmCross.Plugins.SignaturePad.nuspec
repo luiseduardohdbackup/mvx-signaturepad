@@ -2,9 +2,9 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.MvvmCross.Plugins.SignaturePad</id>
-        <version>1.0.0</version>
+        <version>1.0.0-beta</version>
         <title>MvvmCross Signature Pad Plugin</title>
-        <description>Signature Pad for MvvmCross.  Component by Xamarin.  Supports iOS, Android, and WinPhone8</description>
+        <description>Signature Pad for MvvmCross.  Component by Xamarin.  Supports iOS and Android</description>
         <authors>Allan Ritchie</authors>
         <owners>Allan Ritchie</owners>
         <licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
@@ -17,7 +17,7 @@
         </dependencies>
         <releaseNotes>
 1.0
-Initial Release
+Initial Beta Release (WP8 support coming soon)
         </releaseNotes>
     </metadata>
     <files>
@@ -37,9 +37,9 @@ Initial Release
         <file src="TouchSignaturePadPluginBootstrap.cs.pp" target="content\MonoTouch\Bootstrap\SignaturePadPluginBootstrap.cs.pp" />
 
         <!--winphone-->
-        <file src="..\bin\Release\Portable\Acr.MvvmCross.Plugins.SignaturePad.dll" target="lib\wp8\Acr.MvvmCross.Plugins.SignaturePad.dll" />
+        <!--<file src="..\bin\Release\Portable\Acr.MvvmCross.Plugins.SignaturePad.dll" target="lib\wp8\Acr.MvvmCross.Plugins.SignaturePad.dll" />
         <file src="..\bin\Release\WinPhone\Acr.MvvmCross.Plugins.SignaturePad.WindowsPhone.dll" target="lib\wp8\Acr.MvvmCross.Plugins.SignaturePad.WindowsPhone.dll" />
         <file src="..\bin\Release\MonoAndroid\SignaturePad.WinPhone.dll" target="lib\MonoTouch\SignaturePad.WinPhone.dll" />
-        <file src="SignaturePadPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SignaturePadPluginBootstrap.cs.pp" />
+        <file src="SignaturePadPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SignaturePadPluginBootstrap.cs.pp" />-->
     </files>
 </package>

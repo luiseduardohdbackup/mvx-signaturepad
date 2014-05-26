@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using Cirrious.CrossCore.UI;
 
@@ -14,7 +13,7 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
                 BackgroundColor = MvxColors.GhostWhite,
                 CaptionTextColor = MvxColors.Black,
                 ClearTextColor = MvxColors.Black,
-                PromptColor = MvxColors.White,
+                PromptTextColor = MvxColors.White,
                 StrokeColor = MvxColors.Black,
                 StrokeWidth = 2f,
                 SignatureLineColor = MvxColors.Black,
@@ -31,41 +30,66 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
         protected abstract void GetSignature(Action<SignatureResult> onResult, SignaturePadConfiguration cfg);
         protected abstract void Load(IEnumerable<DrawPoint> points, SignaturePadConfiguration cfg);
 
-        protected virtual void SetConfiguratuion(SignaturePadConfiguration cfg) {
+
+        protected virtual void EnsureConfiguration(ref SignaturePadConfiguration cfg) {
             if (cfg == null)
-                cfg = this.DefaultConfiguration;
-            else {
-                cfg.BackgroundColor = cfg.BackgroundColor ?? this.DefaultConfiguration.BackgroundColor;
-                cfg.CancelText = cfg.CancelText ?? this.DefaultConfiguration.CancelText;
-                cfg.CaptionText = cfg.CaptionText ?? this.DefaultConfiguration.CaptionText;
-                cfg.CaptionTextColor = cfg.CaptionTextColor ?? this.DefaultConfiguration.CaptionTextColor;
-                cfg.ClearText = cfg.ClearText ?? this.DefaultConfiguration.ClearText;
-                cfg.ClearTextColor = cfg.ClearTextColor ?? this.DefaultConfiguration.ClearTextColor;
-                cfg.PromptColor = cfg.PromptColor ?? this.DefaultConfiguration.PromptColor;
-                cfg.PromptText = cfg.PromptText ?? this.DefaultConfiguration.PromptText;
-                cfg.SaveText = cfg.SaveText ?? this.DefaultConfiguration.SaveText;
-                cfg.SignatureLineColor = cfg.SignatureLineColor ?? this.DefaultConfiguration.SignatureLineColor;
-                cfg.StrokeColor = cfg.StrokeColor ?? this.DefaultConfiguration.StrokeColor;
-                cfg.StrokeWidth = cfg.StrokeWidth ?? this.DefaultConfiguration.StrokeWidth;
-            }        
+                cfg = new SignaturePadConfiguration();
+
+            if (cfg.BackgroundColor == null)
+                cfg.BackgroundColor = this.DefaultConfiguration.BackgroundColor;
+
+            if (cfg.CancelText == null)
+                cfg.CancelText = this.DefaultConfiguration.CancelText;
+
+            if (cfg.CaptionText == null)
+                cfg.CaptionText = this.DefaultConfiguration.CaptionText;
+
+            if (cfg.CaptionTextColor == null)
+                cfg.CaptionTextColor = this.DefaultConfiguration.CaptionTextColor;
+            
+            if (cfg.ClearText == null)
+                cfg.ClearText = this.DefaultConfiguration.ClearText;
+
+            if (cfg.ClearTextColor == null)
+                cfg.ClearTextColor = this.DefaultConfiguration.ClearTextColor;
+
+            if (cfg.PromptTextColor == null)
+                cfg.PromptTextColor = this.DefaultConfiguration.PromptTextColor;
+
+            if (cfg.PromptText == null)
+                cfg.PromptText = this.DefaultConfiguration.PromptText;
+
+            if (cfg.SaveText == null)
+                cfg.SaveText = this.DefaultConfiguration.SaveText;
+
+            if (cfg.SignatureLineColor == null)
+                cfg.SignatureLineColor = this.DefaultConfiguration.SignatureLineColor;
+
+            if (cfg.StrokeColor == null)
+                cfg.StrokeColor = this.DefaultConfiguration.StrokeColor;
+
+            if (cfg.StrokeWidth == null)
+                cfg.StrokeWidth = this.DefaultConfiguration.StrokeWidth;
+
+            return cfg;
         }
 
 
         public virtual void LoadSignature(IEnumerable<DrawPoint> points, SignaturePadConfiguration cfg) {
-            this.SetConfiguratuion(cfg);
+            this.EnsureConfiguration(ref cfg);
             this.Load(points, cfg);
         }
 
 
-        public virtual Task<SignatureResult> RequestSignatureAsync(SignaturePadConfiguration cfg) {
-            var tcs = new TaskCompletionSource<SignatureResult>();
-            this.RequestSignature(x => tcs.SetResult(x), cfg);
-            return tcs.Task;
-        }
+        //public virtual Task<SignatureResult> RequestSignatureAsync(SignaturePadConfiguration cfg) {
+        //    var tcs = new TaskCompletionSource<SignatureResult>();
+        //    this.RequestSignature(x => tcs.SetResult(x), cfg);
+        //    return tcs.Task;
+        //}
 
 
         public virtual void RequestSignature(Action<SignatureResult> onResult, SignaturePadConfiguration cfg) {
-            this.SetConfiguratuion(cfg);
+            this.EnsureConfiguration(ref cfg);
             this.GetSignature(onResult, cfg);
         }
         

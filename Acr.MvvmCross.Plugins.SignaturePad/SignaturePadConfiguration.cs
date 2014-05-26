@@ -24,7 +24,7 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
         public MvxColor CaptionTextColor { get; set; }
 
         public string PromptText { get; set; }
-        public MvxColor PromptColor { get; set; }
+        public MvxColor PromptTextColor { get; set; }
 
         public string ClearText { get; set; }
         public MvxColor ClearTextColor { get; set; }
