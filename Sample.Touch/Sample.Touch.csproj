@@ -96,14 +96,15 @@
     <Compile Include="Bootstrap\DownloadCachePluginBootstrap.cs" />
     <Compile Include="Bootstrap\FilePluginBootstrap.cs" />
     <Compile Include="Bootstrap\SignaturePadPluginBootstrap.cs" />
+    <Compile Include="Bootstrap\UserDialogsPluginBootstrap.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Acr.MvvmCross.Plugins.SignaturePad.Touch\Acr.MvvmCross.Plugins.SignaturePad.Touch.csproj">
-      <Project>{b12d20aa-0edf-4903-b385-bb8090848532}</Project>
+      <Project>{B12D20AA-0EDF-4903-B385-BB8090848532}</Project>
       <Name>Acr.MvvmCross.Plugins.SignaturePad.Touch</Name>
     </ProjectReference>
     <ProjectReference Include="..\Acr.MvvmCross.Plugins.SignaturePad\Acr.MvvmCross.Plugins.SignaturePad.csproj">
-      <Project>{b2af970d-d640-451c-95af-92af531b8c1e}</Project>
+      <Project>{B2AF970D-D640-451C-95AF-92AF531B8C1E}</Project>
       <Name>Acr.MvvmCross.Plugins.SignaturePad</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sample.Core\Sample.Core.csproj">
@@ -142,7 +143,7 @@
       <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1\lib\MonoTouch\Cirrious.MvvmCross.Touch.dll</HintPath>
     </Reference>
     <Reference Include="SignaturePad.iOS">
-      <HintPath>..\packages\Acr.MvvmCross.Plugins.SignaturePad.1.0.0-beta\lib\MonoTouch\SignaturePad.iOS.dll</HintPath>
+      <HintPath>..\Components\signature-pad-1.3.3\lib\ios\SignaturePad.iOS.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -170,7 +171,22 @@
       <HintPath>..\packages\MvvmCross.HotTuna.Plugin.File.3.1.1\lib\MonoTouch\Cirrious.MvvmCross.Plugins.File.Touch.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
+    <Reference Include="Acr.MvvmCross.Plugins.UserDialogs">
+      <HintPath>..\packages\Acr.MvvmCross.Plugins.UserDialogs.1.1.2\lib\MonoTouch\Acr.MvvmCross.Plugins.UserDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.MvvmCross.Plugins.UserDialogs.Touch">
+      <HintPath>..\packages\Acr.MvvmCross.Plugins.UserDialogs.1.1.2\lib\MonoTouch\Acr.MvvmCross.Plugins.UserDialogs.Touch.dll</HintPath>
+    </Reference>
+    <Reference Include="BTProgressHUD">
+      <HintPath>..\packages\Acr.MvvmCross.Plugins.UserDialogs.1.1.2\lib\MonoTouch\BTProgressHUD.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup />
+  <ItemGroup>
+    <XamarinComponentReference Include="signature-pad">
+      <Version>1.3.3</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+  </ItemGroup>
 </Project>

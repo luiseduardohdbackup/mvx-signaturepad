@@ -119,7 +119,7 @@
   -->
   <ItemGroup>
     <ProjectReference Include="..\Acr.MvvmCross.Plugins.SignaturePad\Acr.MvvmCross.Plugins.SignaturePad.csproj">
-      <Project>{b2af970d-d640-451c-95af-92af531b8c1e}</Project>
+      <Project>{B2AF970D-D640-451C-95AF-92AF531B8C1E}</Project>
       <Name>Acr.MvvmCross.Plugins.SignaturePad</Name>
     </ProjectReference>
   </ItemGroup>

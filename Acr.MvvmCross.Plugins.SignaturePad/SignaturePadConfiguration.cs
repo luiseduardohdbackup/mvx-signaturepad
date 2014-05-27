@@ -18,6 +18,7 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
         public string CancelText { get; set; }
 
         public MvxColor BackgroundColor { get; set; }
+        public MvxColor SignatureBackgroundColor { get; set; }
         public MvxColor SignatureLineColor { get; set; }
         
         public string CaptionText { get; set; }

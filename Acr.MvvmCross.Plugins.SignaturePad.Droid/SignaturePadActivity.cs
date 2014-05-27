@@ -23,12 +23,15 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
             base.OnCreate(bundle);
             this.SetContentView(Resource.Layout.SignaturePad);
 
+            var rootView = this.FindViewById<RelativeLayout>(Resource.Id.rootView);
             this.signatureView = this.FindViewById<SignaturePadView>(Resource.Id.signatureView);
             this.btnSave = this.FindViewById<Button>(Resource.Id.btnSave);
             this.btnCancel = this.FindViewById<Button>(Resource.Id.btnCancel);
 
             var cfg = DroidSignatureService.CurrentConfig;
-            this.signatureView.BackgroundColor = cfg.BackgroundColor.ToAndroidColor();
+
+            rootView.Background = cfg.BackgroundColor.ToAndroidColor();
+            this.signatureView.BackgroundColor = cfg.SignatureBackgroundColor.ToAndroidColor();
             this.signatureView.Caption.Text = cfg.CaptionText;
             this.signatureView.Caption.SetTextColor(cfg.CaptionTextColor.ToAndroidColor());
             this.signatureView.ClearLabel.Text = cfg.ClearText;

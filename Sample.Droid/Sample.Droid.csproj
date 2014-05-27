@@ -112,6 +112,15 @@
     <Reference Include="Cirrious.MvvmCross.Plugins.File.Droid">
       <HintPath>..\packages\MvvmCross.HotTuna.Plugin.File.3.1.1\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.File.Droid.dll</HintPath>
     </Reference>
+    <Reference Include="Acr.MvvmCross.Plugins.UserDialogs">
+      <HintPath>..\packages\Acr.MvvmCross.Plugins.UserDialogs.1.1.2\lib\MonoAndroid\Acr.MvvmCross.Plugins.UserDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.MvvmCross.Plugins.UserDialogs.Droid">
+      <HintPath>..\packages\Acr.MvvmCross.Plugins.UserDialogs.1.1.2\lib\MonoAndroid\Acr.MvvmCross.Plugins.UserDialogs.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="AndHUD">
+      <HintPath>..\packages\Acr.MvvmCross.Plugins.UserDialogs.1.1.2\lib\MonoAndroid\AndHUD.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrap\ColorPluginBootstrap.cs" />
@@ -124,6 +133,7 @@
     <Compile Include="Views\HomeActivity.cs" />
     <Compile Include="Views\SplashActivity.cs" />
     <Compile Include="Views\ConfigurationActivity.cs" />
+    <Compile Include="Bootstrap\UserDialogsPluginBootstrap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -150,11 +160,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Acr.MvvmCross.Plugins.SignaturePad.Droid\Acr.MvvmCross.Plugins.SignaturePad.Droid.csproj">
-      <Project>{1d5482f6-aa89-422c-9e34-88a8a1ad8ab6}</Project>
+      <Project>{1D5482F6-AA89-422C-9E34-88A8A1AD8AB6}</Project>
       <Name>Acr.MvvmCross.Plugins.SignaturePad.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\Acr.MvvmCross.Plugins.SignaturePad\Acr.MvvmCross.Plugins.SignaturePad.csproj">
-      <Project>{b2af970d-d640-451c-95af-92af531b8c1e}</Project>
+      <Project>{B2AF970D-D640-451C-95AF-92AF531B8C1E}</Project>
       <Name>Acr.MvvmCross.Plugins.SignaturePad</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sample.Core\Sample.Core.csproj">

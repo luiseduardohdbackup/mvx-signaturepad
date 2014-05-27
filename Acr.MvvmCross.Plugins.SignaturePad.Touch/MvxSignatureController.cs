@@ -43,7 +43,8 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
         public override void ViewDidLoad() {
             base.ViewDidLoad();
 
-            this.view.Signature.BackgroundColor = this.config.BackgroundColor.ToNativeColor();
+            this.view.BackgroundColor = this.config.BackgroundColor.ToNativeColor();
+            this.view.Signature.BackgroundColor = this.config.SignatureBackgroundColor.ToNativeColor();
             this.view.Signature.Caption.TextColor = this.config.CaptionTextColor.ToNativeColor();
             this.view.Signature.Caption.Text = this.config.CaptionText;
             this.view.Signature.ClearLabel.SetTitle(this.config.ClearText, UIControlState.Normal);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Plugins.File;
+using Acr.MvvmCross.Plugins.UserDialogs;
 using Acr.MvvmCross.Plugins.SignaturePad;
 using Sample.Core.Models;
 
@@ -15,10 +16,14 @@ namespace Sample.Core.ViewModels {
         private const string FILE_FORMAT = "{0:dd-MM-yyyy_hh-mm-ss_tt}.jpg";
         private readonly IMvxFileStore store;
         private readonly ISignatureService signatureService;
+        private readonly IUserDialogService dialogService;
 
 
-        public HomeViewModel(IMvxFileStore store, ISignatureService signatureService) {
+        public HomeViewModel(IMvxFileStore store, 
+                             IUserDialogService dialogService,
+                             ISignatureService signatureService) {
             this.store = store;
+            this.dialogService = dialogService;
             this.signatureService = signatureService;
             this.Configure = new MvxCommand(() => this.ShowViewModel<ConfigurationViewModel>());
             this.Create = new MvxCommand(this.OnCreate);
@@ -69,8 +74,17 @@ namespace Sample.Core.ViewModels {
 
 
         private void OnView(Signature signature) {
-            var path = this.store.NativePath(signature.FileName);
-            // TODO: open
+            this.dialogService.ActionSheet(x => x
+                .Add("View", () => {
+                    
+                })
+                .Add("Delete", async () => {
+                    var r = await this.dialogService.ConfirmAsync("Are you sure you want to delete " + signature.FileName);
+                    if (r)
+                        this.store.DeleteFile(signature.FilePath);
+                })
+                .Add("Cancel")
+            );
         }
 
 

@@ -10,12 +10,13 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
         protected AbstractSignatureService() {
             this.DefaultConfiguration = new SignaturePadConfiguration {
                 ImageType = ImageFormatType.Png,
-                BackgroundColor = MvxColors.GhostWhite,
+                BackgroundColor = MvxColors.DimGray,
                 CaptionTextColor = MvxColors.Black,
                 ClearTextColor = MvxColors.Black,
                 PromptTextColor = MvxColors.White,
                 StrokeColor = MvxColors.Black,
                 StrokeWidth = 2f,
+                SignatureBackgroundColor = MvxColors.White,
                 SignatureLineColor = MvxColors.Black,
 
                 SaveText = "Save",
@@ -31,7 +32,7 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
         protected abstract void Load(IEnumerable<DrawPoint> points, SignaturePadConfiguration cfg);
 
 
-        protected virtual void EnsureConfiguration(ref SignaturePadConfiguration cfg) {
+        protected virtual SignaturePadConfiguration EnsureConfiguration(SignaturePadConfiguration cfg) {
             if (cfg == null)
                 cfg = new SignaturePadConfiguration();
 
@@ -76,7 +77,7 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
 
 
         public virtual void LoadSignature(IEnumerable<DrawPoint> points, SignaturePadConfiguration cfg) {
-            this.EnsureConfiguration(ref cfg);
+            cfg = this.EnsureConfiguration(cfg);
             this.Load(points, cfg);
         }
 
@@ -89,7 +90,7 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
 
 
         public virtual void RequestSignature(Action<SignatureResult> onResult, SignaturePadConfiguration cfg) {
-            this.EnsureConfiguration(ref cfg);
+            cfg = this.EnsureConfiguration(cfg);
             this.GetSignature(onResult, cfg);
         }
         
