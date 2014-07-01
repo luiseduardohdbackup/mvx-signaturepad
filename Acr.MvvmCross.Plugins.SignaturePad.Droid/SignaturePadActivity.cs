@@ -30,7 +30,7 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
 
             var cfg = DroidSignatureService.CurrentConfig;
 
-            rootView.Background = cfg.BackgroundColor.ToAndroidColor();
+            rootView.SetBackgroundColor(cfg.BackgroundColor.ToAndroidColor());
             this.signatureView.BackgroundColor = cfg.SignatureBackgroundColor.ToAndroidColor();
             this.signatureView.Caption.Text = cfg.CaptionText;
             this.signatureView.Caption.SetTextColor(cfg.CaptionTextColor.ToAndroidColor());
@@ -38,9 +38,9 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
             this.signatureView.ClearLabel.SetTextColor(cfg.ClearTextColor.ToAndroidColor());
             this.signatureView.SignatureLineColor = cfg.SignatureLineColor.ToAndroidColor(); 
             this.signatureView.SignaturePrompt.Text = cfg.PromptText;
-            this.signatureView.SignaturePrompt.SetTextColor(cfg.PromptColor.ToAndroidColor());
+            this.signatureView.SignaturePrompt.SetTextColor(cfg.PromptTextColor.ToAndroidColor());
             this.signatureView.StrokeColor = cfg.StrokeColor.ToAndroidColor();
-            this.signatureView.StrokeWidth = cfg.StrokeWidth.Value;
+            this.signatureView.StrokeWidth = cfg.StrokeWidth;
 
             this.btnSave.Text = cfg.SaveText;
             this.btnCancel.Text = cfg.CancelText;

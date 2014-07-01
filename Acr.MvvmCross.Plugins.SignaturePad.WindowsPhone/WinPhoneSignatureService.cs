@@ -1,16 +1,17 @@
 using System;
+using System.Collections.Generic;
 
 
 namespace Acr.MvvmCross.Plugins.SignaturePad.WindowsPhone {
     
     public class WinPhoneSignatureService : AbstractSignatureService {
 
-        protected override void GetSignature(Action<SignatureResult> onResult, SignaturePadConfiguration cfg) {
+        public override void Request(Action<SignatureResult> onResult) {
             throw new NotImplementedException();
         }
 
 
-        protected override void Load(System.Collections.Generic.IEnumerable<DrawPoint> points, SignaturePadConfiguration cfg) {
+        public override void Load(IEnumerable<DrawPoint> points) {
             throw new NotImplementedException();
         }
     }

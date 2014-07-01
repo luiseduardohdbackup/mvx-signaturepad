@@ -31,7 +31,7 @@ namespace Sample.Core.ViewModels {
                 })
                 .ToList();
 
-            var cfg = this.signatureService.DefaultConfiguration;
+            var cfg = this.signatureService.Configuration;
             this.saveText = cfg.SaveText;
             this.cancelText = cfg.CancelText;
             this.promptText = cfg.PromptText;
@@ -78,7 +78,7 @@ namespace Sample.Core.ViewModels {
             get { return this.cancelText; }
             set { 
                 if (this.SetPropertyChange(ref this.cancelText, value))
-                    this.signatureService.DefaultConfiguration.CancelText = value;
+                    this.signatureService.Configuration.CancelText = value;
             }
         }
 
@@ -88,7 +88,7 @@ namespace Sample.Core.ViewModels {
             get { return this.saveText; }
             set { 
                 if (this.SetPropertyChange(ref this.saveText, value))
-                    this.signatureService.DefaultConfiguration.SaveText = value;
+                    this.signatureService.Configuration.SaveText = value;
             }
         }
 
@@ -98,7 +98,7 @@ namespace Sample.Core.ViewModels {
             get { return this.promptText; }
             set {
                 if (this.SetPropertyChange(ref this.promptText, value))
-                    this.signatureService.DefaultConfiguration.PromptText = value;
+                    this.signatureService.Configuration.PromptText = value;
             }
         }
 
@@ -108,7 +108,7 @@ namespace Sample.Core.ViewModels {
             get { return this.captionText; }
             set {
                 if (this.SetPropertyChange(ref this.captionText, value))
-                    this.signatureService.DefaultConfiguration.CaptionText = value;
+                    this.signatureService.Configuration.CaptionText = value;
             }
         }
 
@@ -118,7 +118,7 @@ namespace Sample.Core.ViewModels {
             get { return this.strokeWidth; }
             set {
                 if (this.SetPropertyChange(ref this.strokeWidth, value))
-                    this.signatureService.DefaultConfiguration.StrokeWidth = value;
+                    this.signatureService.Configuration.StrokeWidth = value;
             }
         }
 
@@ -127,7 +127,7 @@ namespace Sample.Core.ViewModels {
             get { return this.signatureLineColor; }
             set {
                 if (this.SetPropertyChange(ref this.signatureLineColor, value))
-                    this.signatureService.DefaultConfiguration.SignatureLineColor = value.Color;
+                    this.signatureService.Configuration.SignatureLineColor = value.Color;
             }
         }
 
@@ -137,7 +137,7 @@ namespace Sample.Core.ViewModels {
             get { return this.strokeColor; }
             set {
                 if (this.SetPropertyChange(ref this.strokeColor, value))
-                    this.signatureService.DefaultConfiguration.StrokeColor = value.Color;
+                    this.signatureService.Configuration.StrokeColor = value.Color;
             }
         }
 
@@ -147,7 +147,7 @@ namespace Sample.Core.ViewModels {
             get { return this.captionTextColor; }
             set {
                 if (this.SetPropertyChange(ref this.captionTextColor, value))
-                    this.signatureService.DefaultConfiguration.CaptionTextColor = value.Color;
+                    this.signatureService.Configuration.CaptionTextColor = value.Color;
             }
         }
 
@@ -157,7 +157,7 @@ namespace Sample.Core.ViewModels {
             get { return this.bgColor; }
             set {
                 if (this.SetPropertyChange(ref this.bgColor, value))
-                    this.signatureService.DefaultConfiguration.BackgroundColor = value.Color;
+                    this.signatureService.Configuration.BackgroundColor = value.Color;
             }
         }
 
@@ -167,7 +167,7 @@ namespace Sample.Core.ViewModels {
             get { return this.promptTextColor; }
             set {
                 if (this.SetPropertyChange(ref this.promptTextColor, value))
-                    this.signatureService.DefaultConfiguration.PromptTextColor = value.Color;
+                    this.signatureService.Configuration.PromptTextColor = value.Color;
             }
         }
 

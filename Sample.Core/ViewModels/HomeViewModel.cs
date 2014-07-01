@@ -56,7 +56,7 @@ namespace Sample.Core.ViewModels {
 
 
         private void OnCreate() {
-            this.signatureService.RequestSignature(result => {
+            this.signatureService.Request(result => {
                 var fileName = String.Format(FILE_FORMAT, DateTime.Now);
                 var path = this.store.NativePath(fileName);
 

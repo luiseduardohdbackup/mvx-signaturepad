@@ -30,7 +30,7 @@ namespace Acr.MvvmCross.Plugins.SignaturePad {
         public string ClearText { get; set; }
         public MvxColor ClearTextColor { get; set; }
 
-        public float? StrokeWidth { get; set; }
+        public float StrokeWidth { get; set; }
         public MvxColor StrokeColor { get; set; }
     }
 }

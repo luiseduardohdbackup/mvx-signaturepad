@@ -14,17 +14,17 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Droid {
         internal static Action<SignatureResult> OnResult { get; private set; }
 
 
-        protected override void GetSignature(Action<SignatureResult> onResult, SignaturePadConfiguration cfg) { 
+        public override void Request(Action<SignatureResult> onResult) { 
             CurrentPoints = null;
-            CurrentConfig = cfg;
+            CurrentConfig = this.Configuration;
             OnResult = onResult;
             var topActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
             topActivity.StartActivity(typeof(SignaturePadActivity));
         }
 
 
-        protected override void Load(IEnumerable<DrawPoint> points, SignaturePadConfiguration cfg) {
-            CurrentConfig = cfg;
+        public override void Load(IEnumerable<DrawPoint> points) {
+            CurrentConfig = this.Configuration;
             CurrentPoints = points;
             OnResult = null;
         }

@@ -53,7 +53,7 @@ namespace Acr.MvvmCross.Plugins.SignaturePad.Touch {
             this.view.Signature.SignaturePrompt.Text = this.config.PromptText;
             this.view.Signature.SignaturePrompt.TextColor = this.config.PromptTextColor.ToNativeColor();
             this.view.Signature.StrokeColor = this.config.StrokeColor.ToNativeColor();
-            this.view.Signature.StrokeWidth = this.config.StrokeWidth.Value;
+            this.view.Signature.StrokeWidth = this.config.StrokeWidth;
             this.view.Signature.Layer.ShadowOffset = new SizeF(0, 0);
             this.view.Signature.Layer.ShadowOpacity = 1f;
 
